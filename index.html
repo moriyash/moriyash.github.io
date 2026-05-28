@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moriya Shalom | Full-Stack Developer</title>
+    <style>
+      :root {
+        --bg: #0a0e1a;
+        --bg-soft: #121829;
+        --text: #eef1ff;
+        --muted: #a8b4e8;
+        --pink: #ff5caa;
+        --cyan: #4de8ff;
+        --violet: #9b7bff;
+        --card: rgba(22, 28, 52, 0.75);
+        --border: rgba(155, 123, 255, 0.28);
+        --glow: rgba(155, 123, 255, 0.15);
+      }
+
+      html {
+        scroll-padding-top: 72px;
+        scroll-behavior: smooth;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background: radial-gradient(ellipse 80% 50% at 10% 0%, #1a1040 0%, transparent 50%),
+          radial-gradient(ellipse 60% 40% at 90% 10%, #0d2840 0%, transparent 45%),
+          radial-gradient(ellipse 70% 50% at 50% 100%, #1a0f28 0%, transparent 50%),
+          linear-gradient(180deg, #0d1224 0%, var(--bg) 100%);
+      }
+
+      .bg-blob {
+        position: fixed;
+        width: 46vmax;
+        height: 46vmax;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.28;
+        z-index: -1;
+        animation: float 14s ease-in-out infinite;
+      }
+
+      .blob-1 {
+        background: var(--pink);
+        top: -18vmax;
+        left: -14vmax;
+      }
+      .blob-2 {
+        background: var(--cyan);
+        bottom: -20vmax;
+        right: -12vmax;
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        background: var(--violet);
+        top: 30%;
+        left: 38%;
+        animation-delay: -9s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.05);
+        }
+      }
+
+      .container {
+        width: min(1120px, 92vw);
+        margin: 0 auto;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background: rgba(10, 14, 26, 0.72);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        z-index: 50;
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.4px;
+      }
+
+      .brand span {
+        color: var(--cyan);
+      }
+
+      .links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .links a:hover {
+        color: var(--cyan);
+      }
+
+      .hero {
+        padding: 72px 0 48px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .profile-wrap {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid var(--border);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        background: var(--bg-soft);
+      }
+
+      .profile-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 22%;
+        display: block;
+      }
+
+      .profile-img.hidden {
+        display: none;
+      }
+
+      .profile-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--cyan);
+      }
+
+      .profile-fallback.hidden {
+        display: none;
+      }
+
+      .hero-tagline {
+        font-size: 1.05rem;
+        color: var(--cyan);
+        font-weight: 600;
+        margin: 0 0 8px;
+      }
+
+      .hero h1 {
+        margin: 0 0 12px;
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        line-height: 1.12;
+        color: var(--text);
+      }
+
+      .hero > div > p {
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.65;
+        margin: 0;
+        max-width: 560px;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: none;
+        text-decoration: none;
+        padding: 12px 17px;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .btn-primary {
+        color: #fff;
+        background: var(--violet);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .btn-secondary {
+        color: var(--text);
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+      }
+
+      .section {
+        padding: 44px 0 24px;
+      }
+
+      .section > h2 {
+        font-size: 1.7rem;
+        margin: 0 0 10px;
+        color: var(--text);
+      }
+
+      .section p.section-text {
+        margin: 0 0 22px;
+        color: var(--muted);
+        max-width: 640px;
+        line-height: 1.6;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .about-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+        backdrop-filter: blur(8px);
+      }
+
+      .about-card h3 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        color: var(--cyan);
+      }
+
+      .about-card p,
+      .about-card li {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .about-card ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .highlights {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .highlight {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center;
+      }
+
+      .highlight strong {
+        display: block;
+        font-size: 1.35rem;
+        color: var(--cyan);
+        margin-bottom: 4px;
+      }
+
+      .highlight span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .soft-skills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .soft-skill {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .soft-skill h4 {
+        margin: 0 0 6px;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+
+      .soft-skill p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .tech-groups {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .tech-group {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .tech-group h3 {
+        margin: 0 0 12px;
+        font-size: 0.9rem;
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        font-size: 0.79rem;
+        font-weight: 600;
+        color: #dce4ff;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(155, 123, 255, 0.2);
+        border: 1px solid rgba(77, 232, 255, 0.25);
+      }
+
+      .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .project {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 22px;
+        backdrop-filter: blur(8px);
+      }
+
+      .project-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .project h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .project-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(77, 232, 255, 0.12);
+        border: 1px solid rgba(77, 232, 255, 0.3);
+        color: var(--cyan);
+        white-space: nowrap;
+      }
+
+      .project-tag.team {
+        background: rgba(255, 92, 170, 0.12);
+        border-color: rgba(255, 92, 170, 0.35);
+        color: var(--pink);
+      }
+
+      .project-tag.private {
+        background: rgba(168, 180, 232, 0.1);
+        border-color: var(--border);
+        color: var(--muted);
+      }
+
+      .project > p {
+        color: var(--muted);
+        margin: 0 0 12px;
+        line-height: 1.55;
+      }
+
+      .project-highlights {
+        margin: 0 0 14px;
+        padding-left: 20px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      .project-highlights li {
+        margin-bottom: 4px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .project-links a {
+        color: var(--cyan);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        margin-right: 16px;
+      }
+
+      .project-links a:hover {
+        text-decoration: underline;
+      }
+
+      .contact {
+        margin: 16px 0 50px;
+        padding: 28px 24px;
+        border-radius: 20px;
+        background: linear-gradient(145deg, rgba(40, 28, 72, 0.6), rgba(18, 32, 56, 0.8));
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        scroll-margin-top: 80px;
+      }
+
+      .contact h2 {
+        margin-top: 0;
+        font-size: 1.7rem;
+        color: var(--text);
+      }
+
+      .contact p {
+        margin: 10px 0;
+        color: var(--muted);
+      }
+
+      .contact a {
+        color: var(--cyan);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .contact a:hover {
+        text-decoration: underline;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          text-align: center;
+          padding-top: 48px;
+        }
+
+        .hero > div > p {
+          max-width: none;
+        }
+
+        .cta-row {
+          justify-content: center;
+        }
+
+        .about-grid,
+        .tech-groups,
+        .soft-skills {
+          grid-template-columns: 1fr;
+        }
+
+        .highlights {
+          grid-template-columns: 1fr;
+        }
+
+        .links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <nav>
+      <div class="container nav-inner">
+        <div class="brand">Moriya<span>.dev</span></div>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="hero reveal">
+        <div class="profile-wrap">
+          <img
+            class="profile-img"
+            id="profile-img"
+            src="profile.png"
+            alt="Moriya Shalom"
+          />
+          <div class="profile-fallback hidden" id="profile-fallback">MS</div>
+        </div>
+        <div>
+          <p class="hero-tagline">Full-Stack Developer</p>
+          <h1>Building reliable web &amp; mobile products end to end</h1>
+          <p>
+            B.Sc. Computer Science graduate (HIT) with hands-on experience in React, React Native,
+            Node.js, and API design. I enjoy turning real requirements into clean backends and
+            intuitive user experiences.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="about">
+        <h2>About Me</h2>
+        <p class="section-text">
+          I focus on full-stack development with a strong backend foundation — REST APIs,
+          authentication, databases, and connecting frontend flows to solid server logic.
+        </p>
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>What I bring</h3>
+            <ul>
+              <li>End-to-end delivery from API design to UI</li>
+              <li>Experience in team-based academic and product projects</li>
+              <li>Problem-solving mindset and attention to reliability</li>
+            </ul>
+          </div>
+          <div class="about-card">
+            <h3>Education</h3>
+            <p>
+              <strong style="color: var(--text)">B.Sc. Computer Science</strong><br />
+              Holon Institute of Technology (HIT) · 2022–2025
+            </p>
+          </div>
+        </div>
+        <div class="highlights">
+          <div class="highlight"><strong>5+</strong><span>Featured projects</span></div>
+          <div class="highlight"><strong>FS</strong><span>Web &amp; mobile stack</span></div>
+          <div class="highlight"><strong>API</strong><span>REST &amp; auth flows</span></div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="projects">
+        <h2>Featured Projects</h2>
+        <p class="section-text">
+          Selected work from my degree and hands-on development — including team projects where
+          collaboration and clear communication were key.
+        </p>
+
+        <div class="projects">
+          <article class="project">
+            <div class="project-header">
+              <h3>Active Rooms Detection System</h3>
+              <span class="project-tag">Two-semester · HIT</span>
+            </div>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">Express</span>
+              <span class="chip">MySQL</span>
+            </div>
+            <p>
+              Campus monitoring platform for tracking classroom activity and room availability
+              with an interactive map-based admin experience.
+            </p>
+            <ul class="project-highlights">
+              <li>Admin dashboard for areas, floors, rooms, and sensors</li>
+              <li>RESTful APIs for hierarchical campus data</li>
+              <li>Map-based sensor placement and management flows</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-header">
+              <h3>FlavorWorld — Mobile App</h3>
+              <span class="project-tag team">Team project</span>
+            </div>
+            <div class="chips">
+              <span class="chip">React Native</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Socket.IO</span>
+              <span class="chip">JWT</span>
+            </div>
+            <p>
+              Cross-platform recipe social app — built collaboratively as part of a full-stack team,
+              covering mobile UX, backend APIs, and real-time features.
+            </p>
+            <ul class="project-highlights">
+              <li>Secure authentication and recipe uploads (images &amp; video)</li>
+              <li>Cooking groups with roles (Owner, Admin, Member)</li>
+              <li>Real-time private and group chat</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-header">
+              <h3>FlavorWorld — Website</h3>
+              <span class="project-tag team">Team project</span>
+            </div>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">Express</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Responsive UI</span>
+            </div>
+            <p>
+              Web companion to the FlavorWorld ecosystem — recipe sharing, community interaction,
+              and a responsive experience for food enthusiasts.
+            </p>
+            <ul class="project-highlights">
+              <li>Recipe browsing, likes, comments, and follow flows</li>
+              <li>JWT-based auth and media-rich recipe content</li>
+              <li>Mobile-first, component-based frontend structure</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-header">
+              <h3>Parking System Project</h3>
+              <span class="project-tag">Academic · HIT</span>
+            </div>
+            <div class="chips">
+              <span class="chip">C#</span>
+              <span class="chip">OpenGL</span>
+              <span class="chip">System logic</span>
+            </div>
+            <p>
+              Software project modeling parking scenarios with structured logic and visual
+              representation of system behavior.
+            </p>
+            <ul class="project-highlights">
+              <li>Translated real-world constraints into application rules</li>
+              <li>Modular design and debugging throughout development</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-header">
+              <h3>PLANA</h3>
+              <span class="project-tag private">Private codebase</span>
+            </div>
+            <div class="chips">
+              <span class="chip">Full-stack</span>
+              <span class="chip">Team workflow</span>
+              <span class="chip">Product delivery</span>
+            </div>
+            <p>
+              Smart planning and task-management product — practical experience in a team environment
+              with production-style workflows (code not public).
+            </p>
+            <ul class="project-highlights">
+              <li>Contributed across frontend and backend implementation</li>
+              <li>Focused on clean delivery, communication, and iteration</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="skills">
+        <h2>Skills</h2>
+        <p class="section-text">Technical stack and strengths I apply across projects.</p>
+
+        <div class="soft-skills">
+          <div class="soft-skill">
+            <h4>Collaboration</h4>
+            <p>Comfortable working in teams on shared codebases and split responsibilities.</p>
+          </div>
+          <div class="soft-skill">
+            <h4>Problem-solving</h4>
+            <p>Breaking complex requirements into clear API and UI building blocks.</p>
+          </div>
+          <div class="soft-skill">
+            <h4>Fast learner</h4>
+            <p>Quick to pick up new tools, frameworks, and project conventions.</p>
+          </div>
+        </div>
+
+        <div class="tech-groups">
+          <div class="tech-group">
+            <h3>Frontend</h3>
+            <div class="tech-list">
+              <span class="chip">React</span>
+              <span class="chip">React Native</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+            </div>
+          </div>
+          <div class="tech-group">
+            <h3>Backend</h3>
+            <div class="tech-list">
+              <span class="chip">Node.js</span>
+              <span class="chip">Express</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">JWT / Auth</span>
+              <span class="chip">Socket.IO</span>
+            </div>
+          </div>
+          <div class="tech-group">
+            <h3>Databases</h3>
+            <div class="tech-list">
+              <span class="chip">MongoDB</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">Firebase</span>
+            </div>
+          </div>
+          <div class="tech-group">
+            <h3>Tools &amp; more</h3>
+            <div class="tech-list">
+              <span class="chip">Git &amp; GitHub</span>
+              <span class="chip">Postman</span>
+              <span class="chip">Java</span>
+              <span class="chip">Python</span>
+              <span class="chip">QA mindset</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact reveal" id="contact">
+        <h2>Let's Connect</h2>
+        <p>Email: <a href="mailto:moriyashalom2002@gmail.com">moriyashalom2002@gmail.com</a></p>
+        <p>
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/moriyashalom/" target="_blank" rel="noreferrer">linkedin.com/in/moriyashalom</a>
+        </p>
+        <p>
+          GitHub:
+          <a href="https://github.com/moriyash" target="_blank" rel="noreferrer">github.com/moriyash</a>
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const profileImg = document.getElementById("profile-img");
+      const profileFallback = document.getElementById("profile-fallback");
+
+      function showProfilePhoto() {
+        profileImg.classList.remove("hidden");
+        profileFallback.classList.add("hidden");
+      }
+
+      function showProfileFallback() {
+        profileImg.classList.add("hidden");
+        profileFallback.classList.remove("hidden");
+      }
+
+      profileImg.addEventListener("load", showProfilePhoto);
+      profileImg.addEventListener("error", showProfileFallback);
+
+      if (profileImg.complete && profileImg.naturalWidth > 0) {
+        showProfilePhoto();
+      } else if (profileImg.complete) {
+        showProfileFallback();
+      }
+
+      const observer = new IntersectionObserver(
+        entries => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          }
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
