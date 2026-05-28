@@ -364,31 +364,26 @@
       }
 
       .projects {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
       }
 
       .project {
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 22px;
+        padding: 16px;
         backdrop-filter: blur(8px);
       }
 
       .project-header {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
       .project h3 {
-        margin: 0;
-        font-size: 1.2rem;
+        margin: 0 0 6px;
+        font-size: 1.05rem;
       }
 
       .project-tag {
@@ -416,27 +411,16 @@
 
       .project > p {
         color: var(--muted);
-        margin: 0 0 12px;
-        line-height: 1.55;
-      }
-
-      .project-highlights {
-        margin: 0 0 14px;
-        padding-left: 20px;
-        color: var(--muted);
+        margin: 0 0 10px;
+        line-height: 1.5;
         font-size: 0.92rem;
-        line-height: 1.55;
-      }
-
-      .project-highlights li {
-        margin-bottom: 4px;
       }
 
       .chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 12px;
+        gap: 6px;
+        margin-bottom: 8px;
       }
 
       .project-links a {
@@ -516,6 +500,10 @@
         }
 
         .highlights {
+          grid-template-columns: 1fr;
+        }
+
+        .projects {
           grid-template-columns: 1fr;
         }
 
@@ -618,14 +606,9 @@
               <span class="chip">MySQL</span>
             </div>
             <p>
-              Campus monitoring platform for tracking classroom activity and room availability
-              with an interactive map-based admin experience.
+              Campus monitoring platform with admin dashboard, map-based sensors, and REST APIs
+              for hierarchical campus data.
             </p>
-            <ul class="project-highlights">
-              <li>Admin dashboard for areas, floors, rooms, and sensors</li>
-              <li>RESTful APIs for hierarchical campus data</li>
-              <li>Map-based sensor placement and management flows</li>
-            </ul>
             <div class="project-links">
               <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
             </div>
@@ -644,14 +627,8 @@
               <span class="chip">JWT</span>
             </div>
             <p>
-              Cross-platform recipe social app — built collaboratively as part of a full-stack team,
-              covering mobile UX, backend APIs, and real-time features.
+              Team-built recipe social app with auth, media uploads, cooking groups, and real-time chat.
             </p>
-            <ul class="project-highlights">
-              <li>Secure authentication and recipe uploads (images &amp; video)</li>
-              <li>Cooking groups with roles (Owner, Admin, Member)</li>
-              <li>Real-time private and group chat</li>
-            </ul>
             <div class="project-links">
               <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
             </div>
@@ -669,14 +646,8 @@
               <span class="chip">Responsive UI</span>
             </div>
             <p>
-              Web companion to the FlavorWorld ecosystem — recipe sharing, community interaction,
-              and a responsive experience for food enthusiasts.
+              Web platform for recipe sharing, JWT auth, likes, comments, and responsive UI.
             </p>
-            <ul class="project-highlights">
-              <li>Recipe browsing, likes, comments, and follow flows</li>
-              <li>JWT-based auth and media-rich recipe content</li>
-              <li>Mobile-first, component-based frontend structure</li>
-            </ul>
             <div class="project-links">
               <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
             </div>
@@ -693,13 +664,8 @@
               <span class="chip">System logic</span>
             </div>
             <p>
-              Software project modeling parking scenarios with structured logic and visual
-              representation of system behavior.
+              Parking logic and visualization project with structured rules and modular design.
             </p>
-            <ul class="project-highlights">
-              <li>Translated real-world constraints into application rules</li>
-              <li>Modular design and debugging throughout development</li>
-            </ul>
             <div class="project-links">
               <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
             </div>
@@ -716,13 +682,9 @@
               <span class="chip">Product delivery</span>
             </div>
             <p>
-              Smart planning and task-management product — practical experience in a team environment
-              with production-style workflows (code not public).
+              Smart planning product — team-based full-stack work with production-style workflows
+              (private codebase).
             </p>
-            <ul class="project-highlights">
-              <li>Contributed across frontend and backend implementation</li>
-              <li>Focused on clean delivery, communication, and iteration</li>
-            </ul>
           </article>
         </div>
       </section>
