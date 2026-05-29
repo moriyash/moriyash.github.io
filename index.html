@@ -364,17 +364,40 @@
       }
 
       .projects {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
       }
 
       .project {
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 16px;
+        overflow: hidden;
         backdrop-filter: blur(8px);
+      }
+
+      .project-layout {
+        display: grid;
+        grid-template-columns: minmax(200px, 280px) 1fr;
+        gap: 0;
+      }
+
+      .project-layout.no-media {
+        grid-template-columns: 1fr;
+      }
+
+      .project-media img {
+        width: 100%;
+        height: 100%;
+        min-height: 200px;
+        object-fit: cover;
+        display: block;
+        border-right: 1px solid var(--border);
+      }
+
+      .project-body {
+        padding: 16px;
       }
 
       .project-header {
@@ -503,8 +526,14 @@
           grid-template-columns: 1fr;
         }
 
-        .projects {
+        .project-layout {
           grid-template-columns: 1fr;
+        }
+
+        .project-media img {
+          min-height: 180px;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
         }
 
         .links {
@@ -595,96 +624,120 @@
 
         <div class="projects">
           <article class="project">
-            <div class="project-header">
-              <h3>Active Rooms Detection System</h3>
-              <span class="project-tag">Two-semester · HIT</span>
-            </div>
-            <div class="chips">
-              <span class="chip">React</span>
-              <span class="chip">Node.js</span>
-              <span class="chip">Express</span>
-              <span class="chip">MySQL</span>
-            </div>
-            <p>
-              Campus monitoring platform with admin dashboard, map-based sensors, and REST APIs
-              for hierarchical campus data.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-header">
-              <h3>FlavorWorld - Mobile App</h3>
-              <span class="project-tag team">Team project</span>
-            </div>
-            <div class="chips">
-              <span class="chip">React Native</span>
-              <span class="chip">Node.js</span>
-              <span class="chip">MongoDB</span>
-              <span class="chip">Socket.IO</span>
-              <span class="chip">JWT</span>
-            </div>
-            <p>
-              Mobile App for recipe sharing, media uploads, cooking groups, and real-time chat.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
+            <div class="project-layout no-media">
+              <div class="project-body">
+                <div class="project-header">
+                  <h3>Active Rooms Detection System</h3>
+                  <span class="project-tag">Two-semester · HIT</span>
+                </div>
+                <div class="chips">
+                  <span class="chip">React</span>
+                  <span class="chip">Node.js</span>
+                  <span class="chip">Express</span>
+                  <span class="chip">MySQL</span>
+                </div>
+                <p>
+                  Campus monitoring platform with admin dashboard, map-based sensors, and REST APIs
+                  for hierarchical campus data.
+                </p>
+                <div class="project-links">
+                  <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
+                </div>
+              </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-header">
-              <h3>FlavorWorld - Website</h3>
-              <span class="project-tag team">Team project</span>
-            </div>
-            <div class="chips">
-              <span class="chip">React</span>
-              <span class="chip">Express</span>
-              <span class="chip">MongoDB</span>
-              <span class="chip">Responsive UI</span>
-            </div>
-            <p>
-              Web platform for recipe sharing, JWT auth, likes, comments, and responsive UI.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-header">
-              <h3>Parking System Project</h3>
-              <span class="project-tag">Academic · HIT</span>
-            </div>
-            <div class="chips">
-              <span class="chip">C#</span>
-              <span class="chip">OpenGL</span>
-              <span class="chip">System logic</span>
-            </div>
-            <p>
-              Parking logic and visualization project with structured rules and modular design.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
+            <div class="project-layout no-media">
+              <div class="project-body">
+                <div class="project-header">
+                  <h3>FlavorWorld - Mobile App</h3>
+                  <span class="project-tag team">Team project</span>
+                </div>
+                <div class="chips">
+                  <span class="chip">React Native</span>
+                  <span class="chip">Node.js</span>
+                  <span class="chip">MongoDB</span>
+                  <span class="chip">Socket.IO</span>
+                  <span class="chip">JWT</span>
+                </div>
+                <p>
+                  Mobile App for recipe sharing, media uploads, cooking groups, and real-time chat.
+                </p>
+                <div class="project-links">
+                  <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
+                </div>
+              </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-header">
-              <h3>PLANA</h3>
-              <span class="project-tag private">Private codebase</span>
+            <div class="project-layout no-media">
+              <div class="project-body">
+                <div class="project-header">
+                  <h3>FlavorWorld - Website</h3>
+                  <span class="project-tag team">Team project</span>
+                </div>
+                <div class="chips">
+                  <span class="chip">React</span>
+                  <span class="chip">Express</span>
+                  <span class="chip">MongoDB</span>
+                  <span class="chip">Responsive UI</span>
+                </div>
+                <p>
+                  Web platform for recipe sharing, JWT auth, likes, comments, and responsive UI.
+                </p>
+                <div class="project-links">
+                  <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
+                </div>
+              </div>
             </div>
-            <div class="chips">
-              <span class="chip">Full-stack</span>
-              <span class="chip">Team workflow</span>
-              <span class="chip">Product delivery</span>
+          </article>
+
+          <article class="project">
+            <div class="project-layout">
+              <div class="project-media">
+                <img src="images/parking.png" alt="Parking System Project screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-header">
+                  <h3>Parking System Project</h3>
+                  <span class="project-tag">Academic · HIT</span>
+                </div>
+                <div class="chips">
+                  <span class="chip">C#</span>
+                  <span class="chip">OpenGL</span>
+                  <span class="chip">System logic</span>
+                </div>
+                <p>
+                  Parking logic and visualization project with structured rules and modular design.
+                </p>
+                <div class="project-links">
+                  <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
+                </div>
+              </div>
             </div>
-            <p>
-             Plana is a mobile app for shared life planning.
-             It brings groups, category-based workspaces, activity, profile, and settings into one calm, multilingual experience, with full RTL support.
-            </p>
+          </article>
+
+          <article class="project">
+            <div class="project-layout no-media">
+              <div class="project-body">
+                <div class="project-header">
+                  <h3>PLANA</h3>
+                  <span class="project-tag private">Private codebase</span>
+                </div>
+                <div class="chips">
+                  <span class="chip">Full-stack</span>
+                  <span class="chip">Team workflow</span>
+                  <span class="chip">Product delivery</span>
+                </div>
+                <p>
+                  Plana is a mobile app for shared life planning. It brings groups, category-based
+                  workspaces, activity, profile, and settings into one calm, multilingual experience,
+                  with full RTL support.
+                </p>
+              </div>
+            </div>
           </article>
         </div>
       </section>
