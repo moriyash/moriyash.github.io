@@ -377,27 +377,72 @@
         backdrop-filter: blur(8px);
       }
 
-      .project-layout {
-        display: grid;
-        grid-template-columns: minmax(200px, 280px) 1fr;
-        gap: 0;
-      }
-
-      .project-layout.no-media {
-        grid-template-columns: 1fr;
-      }
-
-      .project-media img {
-        width: 100%;
-        height: 100%;
-        min-height: 200px;
-        object-fit: cover;
-        display: block;
-        border-right: 1px solid var(--border);
-      }
-
       .project-body {
         padding: 16px;
+      }
+
+      .project-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+
+      .gallery-thumb {
+        padding: 0;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--bg-soft);
+      }
+
+      .gallery-thumb:hover {
+        border-color: var(--cyan);
+      }
+
+      .gallery-thumb img {
+        display: block;
+        width: 76px;
+        height: 76px;
+        object-fit: cover;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(5, 8, 18, 0.92);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .lightbox.hidden {
+        display: none;
+      }
+
+      .lightbox img {
+        max-width: min(92vw, 1100px);
+        max-height: 88vh;
+        border-radius: 12px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        background: var(--bg-soft);
+        color: var(--text);
+        font-size: 1.6rem;
+        line-height: 1;
+        cursor: pointer;
       }
 
       .project-header {
@@ -526,14 +571,9 @@
           grid-template-columns: 1fr;
         }
 
-        .project-layout {
-          grid-template-columns: 1fr;
-        }
-
-        .project-media img {
-          min-height: 180px;
-          border-right: none;
-          border-bottom: 1px solid var(--border);
+        .gallery-thumb img {
+          width: 64px;
+          height: 64px;
         }
 
         .links {
@@ -624,119 +664,134 @@
 
         <div class="projects">
           <article class="project">
-            <div class="project-layout no-media">
-              <div class="project-body">
-                <div class="project-header">
-                  <h3>Active Rooms Detection System</h3>
-                  <span class="project-tag">Two-semester · HIT</span>
-                </div>
-                <div class="chips">
-                  <span class="chip">React</span>
-                  <span class="chip">Node.js</span>
-                  <span class="chip">Express</span>
-                  <span class="chip">MySQL</span>
-                </div>
-                <p>
-                  Campus monitoring platform with admin dashboard, map-based sensors, and REST APIs
-                  for hierarchical campus data.
-                </p>
-                <div class="project-links">
-                  <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
-                </div>
+            <div class="project-body">
+              <div class="project-header">
+                <h3>Active Rooms Detection System</h3>
+                <span class="project-tag">Two-semester · HIT</span>
+              </div>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">Express</span>
+                <span class="chip">MySQL</span>
+              </div>
+              <p>
+                Campus monitoring platform with admin dashboard, map-based sensors, and REST APIs
+                for hierarchical campus data.
+              </p>
+              <div class="project-gallery">
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 1"><img src="images/active-rooms/1.png" alt="Active Rooms screenshot 1" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 2"><img src="images/active-rooms/2.png" alt="Active Rooms screenshot 2" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 3"><img src="images/active-rooms/3.png" alt="Active Rooms screenshot 3" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 4"><img src="images/active-rooms/4.png" alt="Active Rooms screenshot 4" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 5"><img src="images/active-rooms/5.png" alt="Active Rooms screenshot 5" loading="lazy" /></button>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/moriyash/ActiveRoomsSystem" target="_blank" rel="noreferrer">GitHub →</a>
               </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-layout no-media">
-              <div class="project-body">
-                <div class="project-header">
-                  <h3>FlavorWorld - Mobile App</h3>
-                  <span class="project-tag team">Team project</span>
-                </div>
-                <div class="chips">
-                  <span class="chip">React Native</span>
-                  <span class="chip">Node.js</span>
-                  <span class="chip">MongoDB</span>
-                  <span class="chip">Socket.IO</span>
-                  <span class="chip">JWT</span>
-                </div>
-                <p>
-                  Mobile App for recipe sharing, media uploads, cooking groups, and real-time chat.
-                </p>
-                <div class="project-links">
-                  <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
-                </div>
+            <div class="project-body">
+              <div class="project-header">
+                <h3>FlavorWorld - Mobile App</h3>
+                <span class="project-tag team">Team project</span>
+              </div>
+              <div class="chips">
+                <span class="chip">React Native</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">MongoDB</span>
+                <span class="chip">Socket.IO</span>
+                <span class="chip">JWT</span>
+              </div>
+              <p>
+                Mobile App for recipe sharing, media uploads, cooking groups, and real-time chat.
+              </p>
+              <div class="project-gallery">
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 1"><img src="images/flavorworld-app/1.png" alt="FlavorWorld app screenshot 1" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 2"><img src="images/flavorworld-app/2.png" alt="FlavorWorld app screenshot 2" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 3"><img src="images/flavorworld-app/3.png" alt="FlavorWorld app screenshot 3" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 4"><img src="images/flavorworld-app/4.png" alt="FlavorWorld app screenshot 4" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 5"><img src="images/flavorworld-app/5.png" alt="FlavorWorld app screenshot 5" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 6"><img src="images/flavorworld-app/6.png" alt="FlavorWorld app screenshot 6" loading="lazy" /></button>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/moriyash/FlavorWorldApplication" target="_blank" rel="noreferrer">GitHub →</a>
               </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-layout no-media">
-              <div class="project-body">
-                <div class="project-header">
-                  <h3>FlavorWorld - Website</h3>
-                  <span class="project-tag team">Team project</span>
-                </div>
-                <div class="chips">
-                  <span class="chip">React</span>
-                  <span class="chip">Express</span>
-                  <span class="chip">MongoDB</span>
-                  <span class="chip">Responsive UI</span>
-                </div>
-                <p>
-                  Web platform for recipe sharing, JWT auth, likes, comments, and responsive UI.
-                </p>
-                <div class="project-links">
-                  <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
-                </div>
+            <div class="project-body">
+              <div class="project-header">
+                <h3>FlavorWorld - Website</h3>
+                <span class="project-tag team">Team project</span>
+              </div>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">Express</span>
+                <span class="chip">MongoDB</span>
+                <span class="chip">Responsive UI</span>
+              </div>
+              <p>
+                Web platform for recipe sharing, JWT auth, likes, comments, and responsive UI.
+              </p>
+              <div class="project-gallery">
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 1"><img src="images/flavorworld-web/1.png" alt="FlavorWorld website screenshot 1" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 2"><img src="images/flavorworld-web/2.png" alt="FlavorWorld website screenshot 2" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 3"><img src="images/flavorworld-web/3.png" alt="FlavorWorld website screenshot 3" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 4"><img src="images/flavorworld-web/4.png" alt="FlavorWorld website screenshot 4" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 5"><img src="images/flavorworld-web/5.png" alt="FlavorWorld website screenshot 5" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 6"><img src="images/flavorworld-web/6.png" alt="FlavorWorld website screenshot 6" loading="lazy" /></button>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/moriyash/FlavorWorldWebsite" target="_blank" rel="noreferrer">GitHub →</a>
               </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-layout">
-              <div class="project-media">
-                <img src="images/parking.png" alt="Parking System Project screenshot" />
+            <div class="project-body">
+              <div class="project-header">
+                <h3>Parking System Project</h3>
+                <span class="project-tag">Academic · HIT</span>
               </div>
-              <div class="project-body">
-                <div class="project-header">
-                  <h3>Parking System Project</h3>
-                  <span class="project-tag">Academic · HIT</span>
-                </div>
-                <div class="chips">
-                  <span class="chip">C#</span>
-                  <span class="chip">OpenGL</span>
-                  <span class="chip">System logic</span>
-                </div>
-                <p>
-                  Parking logic and visualization project with structured rules and modular design.
-                </p>
-                <div class="project-links">
-                  <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
-                </div>
+              <div class="chips">
+                <span class="chip">C#</span>
+                <span class="chip">OpenGL</span>
+                <span class="chip">System logic</span>
+              </div>
+              <p>
+                Parking logic and visualization project with structured rules and modular design.
+              </p>
+              <div class="project-gallery">
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 1"><img src="images/parking/1.png" alt="Parking project screenshot 1" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 2"><img src="images/parking/2.png" alt="Parking project screenshot 2" loading="lazy" /></button>
+                <button type="button" class="gallery-thumb" aria-label="View screenshot 3"><img src="images/parking/3.png" alt="Parking project screenshot 3" loading="lazy" /></button>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/moriyash/ParkingOpenGL_Project" target="_blank" rel="noreferrer">GitHub →</a>
               </div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-layout no-media">
-              <div class="project-body">
-                <div class="project-header">
-                  <h3>PLANA</h3>
-                  <span class="project-tag private">Private codebase</span>
-                </div>
-                <div class="chips">
-                  <span class="chip">Full-stack</span>
-                  <span class="chip">Team workflow</span>
-                  <span class="chip">Product delivery</span>
-                </div>
-                <p>
-                  Plana is a mobile app for shared life planning. It brings groups, category-based
-                  workspaces, activity, profile, and settings into one calm, multilingual experience,
-                  with full RTL support.
-                </p>
+            <div class="project-body">
+              <div class="project-header">
+                <h3>PLANA</h3>
+                <span class="project-tag private">Private codebase</span>
               </div>
+              <div class="chips">
+                <span class="chip">Full-stack</span>
+                <span class="chip">Team workflow</span>
+                <span class="chip">Product delivery</span>
+              </div>
+              <p>
+                Plana is a mobile app for shared life planning. It brings groups, category-based
+                workspaces, activity, profile, and settings into one calm, multilingual experience,
+                with full RTL support.
+              </p>
             </div>
           </article>
         </div>
@@ -816,6 +871,11 @@
       </section>
     </main>
 
+    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+      <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+
     <script>
       const profileImg = document.getElementById("profile-img");
       const profileFallback = document.getElementById("profile-fallback");
@@ -848,6 +908,38 @@
         { threshold: 0.12 }
       );
       document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxClose = document.querySelector(".lightbox-close");
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || "Project screenshot";
+        lightbox.classList.remove("hidden");
+        lightbox.setAttribute("aria-hidden", "false");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.add("hidden");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+      }
+
+      document.querySelectorAll(".gallery-thumb").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const img = btn.querySelector("img");
+          if (img) openLightbox(img.src, img.alt);
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", e => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && !lightbox.classList.contains("hidden")) closeLightbox();
+      });
     </script>
   </body>
 </html>
